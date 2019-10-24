@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Application Settings">
+
+        <EditTextPreference
+            android:key="account_name"
+            android:title="@string/calendar_account_title"
+            android:summary="%s"
+            android:dialogTitle="@string/calendar_account_title"
+            android:inputType="textNoSuggestions|textUri"/>
+        <EditTextPreference
+            android:key="account_type"
+            android:title="@string/calendar_account_type"
+            android:summary="%s"
+            android:dialogTitle="@string/calendar_account_type"
+            android:inputType="textNoSuggestions|textUri"/>
+        <EditTextPreference
+            android:key="owner_account"
+            android:title="@string/calendar_owner_account"
+            android:summary="%s"
+            android:dialogTitle="@string/calendar_owner_account"
+            android:inputType="textNoSuggestions|textUri"/>
+
+        <CheckBoxPreference
+            android:key="haptic_feedback"
+            android:title="@string/haptic_feedback_preference_title"
+            android:summary="@string/haptic_feedback_preference_summary" />
+
+        <ListPreference
+            android:dialogTitle="Select first day of week"
+            android:entries="@array/settings_list_preference_titles"
+            android:entryValues="@array/settings_list_preference_values"
+            android:key="list"
+            android:summary="Click to select the first day of the week"
+            android:title="Select first day of week" />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="Dropbox Settings">
+        <Preference
+            android:key="dropbox_login"
+            android:title="Login">
+            <intent android:action="com.example.mss.mobilesalessystem.DropboxLogin"/>
+        </Preference>
+        <Preference
+            android:key="dropbox_details"
+            android:selectable="false"
+            android:persistent="false"
+            android:title="Dropbox Details"
+            android:summary="Name: n/a\nEmail: n/a"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Application Information">
+        <Preference
+            android:key="version_Info"
+            android:selectable="true"
+            android:persistent="false"
+            android:title="Application Version"
+            android:summary="@string/appVersionTitle"/>
+            <Preference
+                android:key="copyright"
+                android:selectable="true"
+                android:persistent="false"
+                android:title="@string/copyright_title"
+                android:summary="@string/copyright_summary"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

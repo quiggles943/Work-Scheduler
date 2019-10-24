@@ -1,0 +1,21 @@
+R_DEF: Internal format may change without notice
+local
+color gray_holo_dark
+color gray_holo_light
+drawable selection_divider
+id buttonHorizontalDivider
+id buttonVerticalDivider
+id cancelButton
+id customTab
+id datePicker
+id okButton
+id slidingTabLayout
+id tabText
+id timePicker
+id viewPager
+layout custom_tab
+layout fragment_date
+layout fragment_time
+layout slide_date_time_picker
+style AppBaseTheme
+style AppTheme

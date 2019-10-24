@@ -1,0 +1,12 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.github.jjobes.slidedatetimepicker" >
+4
+5    <uses-sdk
+5-->D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:7:5-8:41
+6        android:minSdkVersion="14"
+6-->D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:7:5-8:41
+7        android:targetSdkVersion="26" />
+7-->D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:8:9-38
+8
+9</manifest>

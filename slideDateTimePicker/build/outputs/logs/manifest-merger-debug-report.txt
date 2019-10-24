@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:3:1-10:12
+INJECTED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:3:1-10:12
+INJECTED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:3:1-10:12
+	package
+		ADDED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:5:5-52
+		INJECTED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml
+		INJECTED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:4:5-63
+uses-sdk
+ADDED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:7:5-8:41
+INJECTED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:7:5-8:41
+INJECTED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:7:5-8:41
+INJECTED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:7:5-8:41
+INJECTED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:7:5-8:41
+	android:targetSdkVersion
+		ADDED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:8:9-38
+		INJECTED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml
+		INJECTED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml
+		ADDED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml:7:5-8:41
+		INJECTED from D:\Users\Paul\Documents\CalendarTest\slideDateTimePicker\src\main\AndroidManifest.xml
