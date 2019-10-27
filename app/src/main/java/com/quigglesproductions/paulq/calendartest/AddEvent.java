@@ -173,35 +173,50 @@ public class AddEvent extends AppCompatActivity {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addEvent(view);
-                String passbackString = "Add button works";
-                Intent intent = new Intent();
-                intent.putExtra("string", passbackString);
-                setResult(RESULT_OK, intent);
-                finish();
+                boolean success = addEvent();
+                if(success) {
+                    String passbackString = "Add button works";
+                    Intent intent = new Intent();
+                    intent.putExtra("string", passbackString);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+                else{
+                    Snackbar.make(view,"Unable to add Event",Snackbar.LENGTH_LONG).show();
+                }
             }
         });
             }
 
-            public void addEvent(View view){
+            public boolean addEvent(){
+                try {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_CALENDAR}, 0);
                 }
                 ContentResolver cr = getContentResolver();
-                ContentValues contentValues = new ContentValues();
-
+                //add event details
                 ContentValues values = new ContentValues();
-                values.put(CalendarContract.Events.DTSTART,startDate.getTime());
+                values.put(CalendarContract.Events.DTSTART, startDate.getTime());
                 values.put(CalendarContract.Events.DTEND, endDate.getTime());
-                values.put(CalendarContract.Events.TITLE,title.getText().toString());
-                values.put(CalendarContract.Events.DESCRIPTION,"");
-                values.put(CalendarContract.Events.CALENDAR_ID,16);
+                values.put(CalendarContract.Events.TITLE, title.getText().toString());
+                values.put(CalendarContract.Events.DESCRIPTION, "");
+                values.put(CalendarContract.Events.CALENDAR_ID, 16);
                 values.put(CalendarContract.Events.EVENT_TIMEZONE, "Europe/London");
                 Location location = (Location) spinner.getSelectedItem();
-                values.put(CalendarContract.Events.EVENT_LOCATION,location.getLocation());
+                values.put(CalendarContract.Events.EVENT_LOCATION, location.getLocation());
                 values.put(CalendarContract.Events.GUESTS_CAN_INVITE_OTHERS, "1");
                 values.put(CalendarContract.Events.GUESTS_CAN_SEE_GUESTS, "1");
 
                 cr.insert(CalendarContract.Events.CONTENT_URI, values);
+                }
+                catch(SecurityException e){
+                    Log.e("Security Exception", e.getMessage());
+                    return false;
+                }
+                catch(Exception e) {
+                    Log.e("General Exception", e.getMessage());
+                    return false;
+                }
+                return true;
             }
     }
