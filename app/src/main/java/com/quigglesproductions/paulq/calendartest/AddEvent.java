@@ -61,7 +61,7 @@ public class AddEvent extends AppCompatActivity {
         locations = new ArrayList<>();
 
         //test location
-        locations.add(new Location("Sainsburys(Longstone)","Test location"));
+        locations.add(new Location("Sainsburys(Longstone)","Sainsbury's, Inglis Green Rd, Edinburgh EH14 2EP, UK"));
         //
 
         LocationSpinnerAdapter spinnerAdapter = new LocationSpinnerAdapter(context, locations);

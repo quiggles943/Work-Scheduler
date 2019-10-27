@@ -11,7 +11,9 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * Created by paulq on 13/10/2019.
@@ -20,10 +22,10 @@ import java.util.HashMap;
 public class ExpandableEventAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private ArrayList<String> dates;
-    private HashMap<String,ArrayList<Event>> dataSet;
+    private ArrayList<Date> dates;
+    private TreeMap<Date,ArrayList<Event>> dataSet;
 
-    public ExpandableEventAdapter(Context context,ArrayList<String> dates, HashMap<String,ArrayList<Event>> events)
+    public ExpandableEventAdapter(Context context, ArrayList<Date> dates, TreeMap<Date,ArrayList<Event>> events)
     {
         this.context = context;
         this.dates = dates;
@@ -38,7 +40,7 @@ public class ExpandableEventAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int listPosition) {
-        String key = this.dates.get(listPosition);
+        Date key = this.dates.get(listPosition);
         int size = this.dataSet.get(key).size()+1;
         return size;
     }
@@ -73,7 +75,7 @@ public class ExpandableEventAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int listPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String date = dates.get(listPosition);
+        Date date = dates.get(listPosition);
         if(convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.groupview_date,null);
@@ -81,8 +83,8 @@ public class ExpandableEventAdapter extends BaseExpandableListAdapter {
         TextView dateView = (TextView) convertView.findViewById(R.id.tv_groupView_date);
         TextView shiftNumber = (TextView) convertView.findViewById(R.id.tv_groupView_shift_number);
 
-
-        dateView.setText(date);
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        dateView.setText(dateFormat.format(date.getTime()));
         //long shLen = date.getEndDate().getTime() - date.getStartDate().getTime();
         shiftNumber.setText((getChildrenCount(listPosition)-1)+" shift(s)");
         return convertView;
@@ -149,7 +151,7 @@ public class ExpandableEventAdapter extends BaseExpandableListAdapter {
         return length;
     }
 
-    public void update(ArrayList<String> dates,HashMap<String,ArrayList<Event>> events){
+    public void update(ArrayList<Date> dates,TreeMap<Date,ArrayList<Event>> events){
         this.dates = dates;
         this.dataSet = events;
         notifyDataSetChanged();

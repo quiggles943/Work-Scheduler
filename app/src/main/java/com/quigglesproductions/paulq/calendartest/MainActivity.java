@@ -31,17 +31,19 @@ import java.net.ConnectException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class MainActivity extends AppActivity{
 
     Context context;
     View parentView;
     //ArrayList<String> calendars;
-    ArrayList<String> dates;
+    ArrayList<Date> dates;
     ArrayList<Event> events;
-    HashMap<String,ArrayList<Event>> dataSet;
+    TreeMap<Date,ArrayList<Event>> dataSet;
     ExpandableEventAdapter eveAdpt;
     ExpandableListView listView;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -49,7 +51,7 @@ public class MainActivity extends AppActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         parentView = findViewById(android.R.id.content);
-        dates = new ArrayList<String>();
+        dates = new ArrayList<Date>();
         CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.activity_main);
         getLayoutInflater().inflate(R.layout.content_main, layout);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.content_main);
@@ -58,7 +60,7 @@ public class MainActivity extends AppActivity{
         getDataFromCalendarTable();
         listView = (ExpandableListView) findViewById(R.id.list);
         events = new ArrayList<>();
-        dataSet = new HashMap<String,ArrayList<Event>>();
+        dataSet = new TreeMap<Date,ArrayList<Event>>();
         //events.add(new Event(16,"Work","",1571048836,1571048847));
         dataSet = getDataFromEventTable();
         eveAdpt = new ExpandableEventAdapter(context,dates, dataSet);
@@ -183,7 +185,7 @@ public class MainActivity extends AppActivity{
 
     }
 
-    public HashMap<String,ArrayList<Event>> getDataFromEventTable() {
+    public TreeMap<Date,ArrayList<Event>> getDataFromEventTable() {
         ArrayList<Event> content = new ArrayList<>();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALENDAR}, 0);
@@ -215,23 +217,28 @@ public class MainActivity extends AppActivity{
                 String location = cur.getString(cur.getColumnIndex(CalendarContract.Events.EVENT_LOCATION));
                 long dtstart = Long.parseLong(cur.getString(cur.getColumnIndex(CalendarContract.Events.DTSTART)));
                 long dtend = Long.parseLong(cur.getString(cur.getColumnIndex(CalendarContract.Events.DTEND)));
-                //EventDate date = new EventDate(new Date(dtstart));
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                String dateString = dateFormat.format(new Date(dtstart));
-
+                //DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                //String dateString = dateFormat.format(new Date(dtstart));
+                Date testDate = new Date(dtstart);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(testDate);
+                cal.set(Calendar.HOUR_OF_DAY,0);
+                cal.set(Calendar.MINUTE,0);
+                cal.set(Calendar.SECOND,0);
+                Date inputDate = cal.getTime();
                 Event event = new Event(id, title, location, dtstart, dtend);
 
                 //String date = dateFormat.format(event.getStartDate());
-                if(dataSet.get(dateString)== null)
+                if(dataSet.get(inputDate)== null)
                 {
                     ArrayList<Event> events = new ArrayList<>();
                     events.add(event);
-                    dataSet.put(dateString,events);
-                    dates.add(dateString);
+                    dataSet.put(inputDate,events);
+                    dates.add(inputDate);
                 }
                 else
                 {
-                    ArrayList<Event> events = dataSet.get(dateString);
+                    ArrayList<Event> events = dataSet.get(inputDate);
                     boolean unique = true;
                     for(Event e : events)
                     {
@@ -242,8 +249,8 @@ public class MainActivity extends AppActivity{
                     }
                     if(unique) {
                         events.add(event);
-                        dataSet.remove(dateString);
-                        dataSet.put(dateString, events);
+                        dataSet.remove(inputDate);
+                        dataSet.put(inputDate, events);
                     }
                 }
             }
